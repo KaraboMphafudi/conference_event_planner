@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import "./App.css";
-import ConferenceEvent from "./ConferenceEvent";
-import AboutUs from "./AboutUs";
+import React, { useState } from 'react';
+import ConferenceEvent from './ConferenceEvent';
+import './App.css';
 
 function App() {
   const [showVenue, setShowVenue] = useState(false);
@@ -10,30 +9,34 @@ function App() {
     setShowVenue(true);
   };
 
-  return (
-    <>
-      <header className="first_page">
-        <div className="main_event">
-          <div className="first_page_name_btn">
-            <h1 className="budget_heading">Conference Expense Planner</h1>
-            <p className="budget_sentence"> Plan your next major event with us!</p>
-            <div className="getstarted_btn">
-              <button onClick={() => handleGetStarted()} className="get-started-btn">
-                Get Started
-              </button>
-            </div>
+  if (!showVenue) {
+    return (
+      <div className="landing-page">
+        <div className="overlay"></div>
+        <div className="landing-content">
+          <h1 className="company-name">BudgetEase</h1>
+          <p className="company-tagline">Plan your next major event with us!</p>
+          <div className="company-description">
+            <p>
+              BudgetEase is your trusted partner for organizing successful conferences and events. 
+              With years of experience in venue management, we provide comprehensive solutions 
+              that make event planning simple, transparent, and cost-effective.
+            </p>
+            <p>
+              Our conference expense planner helps you calculate every aspect of your event - 
+              from venue selection and audio-visual equipment to catering for your guests. 
+              Get a complete cost breakdown before you commit.
+            </p>
           </div>
-          <div className="aboutus_main">
-            <AboutUs />
-          </div>
+          <button className="get-started-btn" onClick={handleGetStarted}>
+            Get Started
+          </button>
         </div>
-      </header>
-
-      <div className={`event-list-container ${showVenue ? 'visible' : ''}`}>
-        <ConferenceEvent />
       </div>
-    </>
-  );
+    );
+  }
+
+  return <ConferenceEvent />;
 }
 
 export default App;
